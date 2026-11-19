@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #17343d;
+  --color-muted: #2a5560;
+
+  /* your teal palette (names kept so the pages don't need changes) */
+  --color-mist: #ebffd8;
+  --color-sky: #c4e1e6;
+  --color-azure: #a4ccd9;
+  --color-navy: #8dbcc7;
+
+  /* deeper teal for the header and footer, so white text stays readable */
+  --color-deep: #3f7f8f;
+
+  /* used by the red AppButton */
+  --color-mint: #ebffd8;
+  --color-rose: #ffc2cb;
+
+  --font-body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+
+    /* dusty teal mesh gradient with a faint lime glow */
+    background-color: #8dbcc7;
+    background-image:
+      radial-gradient(60% 50% at 12% 8%, rgba(196, 225, 230, 0.95) 0%, transparent 70%),
+      radial-gradient(55% 55% at 90% 12%, rgba(63, 127, 143, 0.55) 0%, transparent 70%),
+      radial-gradient(45% 45% at 78% 92%, rgba(235, 255, 216, 0.75) 0%, transparent 70%),
+      radial-gradient(50% 50% at 8% 88%, rgba(164, 204, 217, 0.9) 0%, transparent 70%);
+    background-attachment: fixed;
+  }
+
+  /* fluted (ribbed) glass: thin vertical bands. 16px = width of one rib */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.28) 0px,
+      rgba(255, 255, 255, 0.04) 8px,
+      rgba(47, 100, 115, 0.1) 14px,
+      rgba(255, 255, 255, 0.28) 16px
+    );
+  }
+
+  /* fine film-grain speckle on top */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  }
+
+  /* keep all content above the glass and grain layers */
+  #__nuxt {
+    position: relative;
+    z-index: 1;
+  }
+
+  ::selection {
+    background: var(--color-mist);
+  }
+}
+
+@layer components {
+  /* frosted glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+    box-shadow:
+      0 10px 40px rgba(47, 100, 115, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+}
